@@ -4,6 +4,7 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
 <title>VitalAI – Your Smart Health Companion</title>
+<link rel="stylesheet"href="style.css">
 <style>
   :root{
     --bg:#0f172a;          /* deep slate */
@@ -72,6 +73,7 @@
 </style>
 </head>
 <body>
+
 <div class="deck">
 
   <!-- SLIDE 1 -->
@@ -270,8 +272,20 @@
   const start = parseInt(location.hash.replace('#',''),10);
   if(!isNaN(start) && start>=1 && start<=total){ show(start-1); } else { show(0); }
 </script>
-</body>
-</html>
-    
+<div class="card">
+  <div class="front">Sensors</div>
+  <div class="back">Collects data from body</div>
+</div>
+
+<div class="card">
+  <div class="front">Microcontroller</div>
+  <div class="back">Processes the signals</div>
+</div>
+
+<div class="card">
+  <div class="front">Mobile App</div>
+  <div class="back">Displays health insights</div>
+</div>
+    <script> src="script.js"</script>
 </body>
 </html>
