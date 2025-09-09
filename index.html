@@ -1,309 +1,63 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>VitalAI – Your Smart Health Companion</title>
-<link rel="stylesheet"href="style.css">
-<style>
-  :root{
-    --bg:#0f172a;          /* deep slate */
-    --card:#111827;        /* darker panel */
-    --accent:#22d3ee;      /* cyan */
-    --accent-2:#34d399;    /* green */
-    --text:#e5e7eb;        /* light text */
-    --muted:#9ca3af;
-  }
-  *{box-sizing:border-box}
-  html,body{height:100%;margin:0;background:var(--bg);color:var(--text);font:16px/1.5 Inter,system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif}
-  .deck{height:100%;display:grid;place-items:center;padding:4vh 5vw}
-  .slide{
-    width:min(1200px,100%);
-    aspect-ratio:16/9;
-    background:linear-gradient(145deg,#0b1226 0%, #0f1a36 40%, #0b1226 100%);
-    border:1px solid rgba(255,255,255,.06);
-    border-radius:28px;
-    box-shadow:0 20px 60px rgba(0,0,0,.45);
-    padding:5vh 5vw; display:none; position:relative; overflow:hidden;
-  }
-  .slide.active{display:block;animation:fade .35s ease}
-  @keyframes fade{from{opacity:.3;transform:translateY(8px)}to{opacity:1;transform:none}}
-
-  h1,h2{margin:.2em 0 .4em}
-  h1{font-size:clamp(26px,5vw,48px);letter-spacing:.2px}
-  h2{font-size:clamp(22px,3.6vw,36px);color:#fff}
-  p,li{font-size:clamp(15px,2vw,22px)}
-  .muted{color:var(--muted)}
-  .tagline{font-weight:600;color:var(--accent)}
-  .grid{display:grid;gap:18px}
-  .cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}
-  .cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}
-  .pill{
-    display:inline-flex;align-items:center;gap:.5rem;
-    padding:.35rem .7rem;border:1px solid rgba(255,255,255,.08);
-    border-radius:999px;background:rgba(255,255,255,.04);font-size:.9em
-  }
-  ul{margin:.2em 0 0 1em}
-  li{margin:.35em 0}
-  .footer{
-    position:absolute;left:5vw;right:5vw;bottom:2.8vh;
-    display:flex;justify-content:space-between;align-items:center;color:var(--muted);font-size:14px
-  }
-  .progress{height:4px;background:rgba(255,255,255,.08);border-radius:999px;overflow:hidden;flex:1;margin:0 1rem}
-  .bar{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent-2))}
-  .kbd{padding:.15rem .45rem;border:1px solid rgba(255,255,255,.2);border-radius:6px;font-size:.85em}
-  .logo{
-    position:absolute; top:24px; right:28px;
-    display:flex; align-items:center; gap:.55rem; font-weight:700; letter-spacing:.4px
-  }
-  .logo svg{width:26px;height:26px}
-  /* simple icon cards */
-  .card{
-    background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);
-    border-radius:18px;padding:14px 16px
-  }
-  .icon{width:28px;height:28px;display:inline-block;vertical-align:middle;margin-right:.4rem}
-  /* print-friendly */
-  @media print{
-    body{background:#fff;color:#111}
-    .slide{display:block !important; break-after:page; background:#fff; color:#111; border:0; box-shadow:none}
-    .logo{display:none}
-    .footer{display:none}
-  }
-</style>
-</head>
-<body>
-
-<div class="deck">
-
-  <!-- SLIDE 1 -->
-  <section class="slide active" data-title="1">
-    <div class="logo">
-      <!-- heart+pulse logo -->
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-        <path stroke-width="1.6" d="M3 12c1.5-4 6-6 9-1l1 2 1-2c3-5 7-3 7 1 0 5-8 9-9 9s-9-4-9-9Z"/>
-      </svg>
-      VitalAI
-    </div>
-    <h1>VitalAI – Your Smart Health Companion</h1>
-    <p class="tagline">“Your health in your hands – powered by AI”</p>
-    <div style="margin-top:2.2vh" class="grid cols-2">
-      <div class="card">
-        <strong>Presenter</strong><br/>[Your Name]
-      </div>
-      <div class="card">
-        <strong>Organization</strong><br/>[Your Startup/Company]
-      </div>
-    </div>
-    <div class="footer">
-      <span class="muted">Use <span class="kbd">←</span> <span class="kbd">→</span> or <span class="kbd">Space</span></span>
-      <div class="progress"><div class="bar"></div></div>
-      <span class="muted">1 / 10</span>
-    </div>
-  </section>
-
-  <!-- SLIDE 2: Problem -->
-  <section class="slide" data-title="2">
-    <h2>The Problem</h2>
-    <ul>
-      <li>Rising lifestyle-related diseases: heart issues, stress, sleep disorders</li>
-      <li>Lack of real-time and affordable health monitoring</li>
-      <li>Care is reactive—people seek treatment after symptoms appear</li>
-    </ul>
-    <div class="footer"><span></span><div class="progress"><div class="bar"></div></div><span class="muted">2 / 10</span></div>
-  </section>
-
-  <!-- SLIDE 3: Solution -->
-  <section class="slide" data-title="3">
-    <h2>The Solution</h2>
-    <ul>
-      <li><strong>AI-powered wearable + mobile app</strong> for continuous monitoring</li>
-      <li>Real-time data fused with <span class="pill">Predictive Analytics</span></li>
-      <li>Personalized lifestyle suggestions: diet, sleep, exercise</li>
-    </ul>
-    <div class="footer"><span></span><div class="progress"><div class="bar"></div></div><span class="muted">3 / 10</span></div>
-  </section>
-
-  <!-- SLIDE 4: Sensor Technology -->
-  <section class="slide" data-title="4">
-    <h2>Sensor Technology</h2>
-    <div class="grid cols-3">
-      <div class="card"><span class="icon">💓</span><strong>PPG</strong><br/><span class="muted">Heart rate, SpO₂</span></div>
-      <div class="card"><span class="icon">🏃</span><strong>Accelerometer</strong><br/><span class="muted">Activity</span></div>
-      <div class="card"><span class="icon">🧭</span><strong>Gyroscope</strong><br/><span class="muted">Orientation</span></div>
-      <div class="card"><span class="icon">🌡</span><strong>Skin Temp</strong><br/><span class="muted">Thermal trends</span></div>
-      <div class="card"><span class="icon">🫀</span><strong>ECG</strong> (optional)</div>
-      <div class="card"><span class="icon">😌</span><strong>EDA</strong> (stress)</div>
-      <div class="card"><span class="icon">🩸</span><strong>Glucose</strong> (non-invasive, emerging)</div>
-    </div>
-    <div class="footer"><span></span><div class="progress"><div class="bar"></div></div><span class="muted">4 / 10</span></div>
-  </section>
-
-  <!-- SLIDE 5: System Architecture -->
-  <section class="slide" data-title="5">
-    <h2>System Architecture</h2>
-    <!-- Simple inline block diagram -->
-    <svg viewBox="0 0 900 160" width="100%" height="180" style="margin-top:8px">
-      <defs>
-        <linearGradient id="g1" x1="0" x2="1">
-          <stop offset="0" stop-color="#22d3ee"/><stop offset="1" stop-color="#34d399"/>
-        </linearGradient>
-      </defs>
-      <g fill="none" stroke="url(#g1)" stroke-width="2">
-        <rect x="10" y="40" rx="12" ry="12" width="140" height="80"/><!-- Sensors -->
-        <rect x="180" y="40" rx="12" ry="12" width="170" height="80"/><!-- MCU -->
-        <rect x="380" y="40" rx="12" ry="12" width="160" height="80"/><!-- App -->
-        <rect x="570" y="40" rx="12" ry="12" width="140" height="80"/><!-- AI -->
-        <rect x="740" y="40" rx="12" ry="12" width="150" height="80"/><!-- UI -->
-        <path d="M150,80 L180,80 M350,80 L380,80 M540,80 L570,80 M710,80 L740,80"/>
-      </g>
-      <g fill="#e5e7eb" font-size="16" font-family="Inter, sans-serif">
-        <text x="35"  y="90">Sensors</text>
-        <text x="210" y="90">Microcontroller</text>
-        <text x="420" y="90">Mobile App</text>
-        <text x="610" y="90">AI Engine</text>
-        <text x="780" y="90">User Interface</text>
-      </g>
-    </svg>
-    <p class="muted" style="margin-top:8px">AI layer processes data for risk prediction, alerts, and personalized recommendations.</p>
-    <div class="footer"><span></span><div class="progress"><div class="bar"></div></div><span class="muted">5 / 10</span></div>
-  </section>
-
-  <!-- SLIDE 6: AI & ML Components -->
-  <section class="slide" data-title="6">
-    <h2>AI & ML Components</h2>
-    <ul>
-      <li>Time-series analysis of vitals (HR, SpO₂, temp, activity)</li>
-      <li>Anomaly detection for early warnings (e.g., arrhythmias)</li>
-      <li>Personalization from individual trends & baselines</li>
-    </ul>
-    <div class="footer"><span></span><div class="progress"><div class="bar"></div></div><span class="muted">6 / 10</span></div>
-  </section>
-
-  <!-- SLIDE 7: Key Features -->
-  <section class="slide" data-title="7">
-    <h2>Key Features</h2>
-    <div class="grid cols-2">
-      <ul class="card">
-        <li>Real-time health monitoring</li>
-        <li>Stress & sleep tracking</li>
-        <li>Smart alerts & emergency notifications</li>
-      </ul>
-      <ul class="card">
-        <li>Local language interface for inclusivity</li>
-        <li>Privacy by design; on-device inference where possible</li>
-        <li>Seamless data export & sharing (opt-in)</li>
-      </ul>
-    </div>
-    <div class="footer"><span></span><div class="progress"><div class="bar"></div></div><span class="muted">7 / 10</span></div>
-  </section>
-
-  <!-- SLIDE 8: Target Audience & Market -->
-  <section class="slide" data-title="8">
-    <h2>Target Audience & Market</h2>
-    <ul>
-      <li>Fitness users, elderly, chronic disease patients</li>
-      <li>Indian wearable market trends: growing <strong>&gt;20% CAGR</strong></li>
-      <li>Partnerships: hospitals, insurance, wellness platforms</li>
-    </ul>
-    <div class="footer"><span></span><div class="progress"><div class="bar"></div></div><span class="muted">8 / 10</span></div>
-  </section>
-
-  <!-- SLIDE 9: Future Scope -->
-  <section class="slide" data-title="9">
-    <h2>Future Scope</h2>
-    <ul>
-      <li>Non-invasive glucose tracking</li>
-      <li>Integration with telemedicine & doctors</li>
-      <li>Predictive community health analytics</li>
-    </ul>
-    <div class="footer"><span></span><div class="progress"><div class="bar"></div></div><span class="muted">9 / 10</span></div>
-  </section>
-
-  <!-- SLIDE 10: Conclusion -->
-  <section class="slide" data-title="10">
-    <h2>Conclusion</h2>
-    <ul>
-      <li><strong>Need:</strong> Preventive, real-time, affordable health monitoring</li>
-      <li><strong>Solution:</strong> AI-driven wearable + app with predictive insights</li>
-      <li><strong>Impact:</strong> Healthier lives, reduced costs, data-driven care</li>
-    </ul>
-    <p class="tagline" style="margin-top:1rem">“VitalAI – Smart, Simple, Personalized Health Monitoring”</p>
-    <div class="footer"><span></span><div class="progress"><div class="bar"></div></div><span class="muted">10 / 10</span></div>
-  </section>
-
-</div>
-
-<script>
-  // Simple slide engine (no dependencies)
-  const slides = [...document.querySelectorAll('.slide')];
-  const total = slides.length;
-  let i = 0;
-
-  function show(n){
-    i = (n + total) % total;
-    slides.forEach((s,idx)=>s.classList.toggle('active', idx===i));
-    // update progress bars and counters
-    document.querySelectorAll('.footer .bar').forEach(b=>{
-      b.style.width = ((i+1)/total*100)+'%';
-    });
-    document.querySelectorAll('.footer .muted:last-child').forEach((el,idx)=>{
-      if(idx===i) el.textContent = (i+1)+' / '+total;
-    });
-    history.replaceState(null, '', '#'+(i+1));
-  }
-
-  function next(){ show(i+1); }
-  function prev(){ show(i-1); }
-
-  document.addEventListener('keydown', e=>{
-    if(['ArrowRight',' '].includes(e.key)) { next(); }
-    if(['ArrowLeft','Backspace'].includes(e.key)) { prev(); }
-  });
-
-  // click advance
-  document.querySelector('.deck').addEventListener('click', (e)=>{
-    // avoid clicking on links
-    if(e.target.closest('a')) return;
-    next();
-  });
-
-  // start from hash if present
-  const start = parseInt(location.hash.replace('#',''),10);
-  if(!isNaN(start) && start>=1 && start<=total){ show(start-1); } else { show(0); }
-</script>
-<div class="card">
-  <div class="front">Sensors</div>
-  <div class="back">Collects data from body</div>
-</div>
-
-<div class="card">
-  <div class="front">Microcontroller</div>
-  <div class="back">Processes the signals</div>
-</div>
-
-<div class="card">
-  <div class="front">Mobile App</div>
-  <div class="back">Displays health insights</div>
-</div>
-<head>
   <meta charset="UTF-8">
-  <title>Enter Your Name</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Healthy Meal Planner</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <h2>Welcome!</h2>
+  <div class="container">
+    <h1>Healthy Meal Planner</h1>
 
-  <p>Enter your name:</p>
-  <input type="text" id="nameInput" placeholder="Your name">
-  <button onclick="showName()">Submit</button>
+    <!-- Sign Up Form -->
+    <form id="signupForm">
+      <h2>Sign Up</h2>
+      <input type="text" id="name" placeholder="Enter your name" required>
+      <input type="email" id="email" placeholder="Enter your email" required>
+      <input type="tel" id="phone" placeholder="Enter phone number" required>
+      <button type="submit">Sign Up</button>
+    </form>
 
-  <p><strong>Your Name:</strong> <span id="displayName">[Your Name]</span></p>
-  <script>
-    function showName() {
-      const name = document.getElementById('nameInput').value;
-      document.getElementById('displayName').textContent = name;
-    }
-  </script>
-<script> src="script.js"</script>
+    <!-- Thank You Message -->
+    <div id="thankYou" class="hidden">
+      <h2>Thank you for signing up!</h2>
+      <button id="nextBtn">Next</button>
+    </div>
+
+    <!-- Diet Preference Form -->
+    <form id="dietForm" class="hidden">
+      <h2>Your Diet Preferences</h2>
+
+      <label>Choose Diet Type:</label>
+      <select id="dietType">
+        <option value="veg">Vegetarian</option>
+        <option value="nonveg">Non-Vegetarian</option>
+        <option value="vegan">Vegan</option>
+      </select>
+
+      <label>Choose Meal Type:</label>
+      <select id="mealType">
+        <option value="breakfast">Breakfast</option>
+        <option value="lunch">Lunch</option>
+        <option value="dinner">Dinner</option>
+      </select>
+
+      <label>Health Problems:</label>
+      <input type="text" id="healthIssues" placeholder="E.g., Diabetes, BP">
+
+      <button type="submit">Get Meal Plan</button>
+    </form>
+
+    <!-- Result Section -->
+    <div id="result" class="hidden">
+      <h2>Your Recommended Meal</h2>
+      <div id="mealPlan"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
 </html>
+    
+    

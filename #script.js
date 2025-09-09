@@ -1,72 +1,52 @@
-// script.js
+ // DOM Elements
+const signupForm = document.getElementById('signupForm');
+const thankYou = document.getElementById('thankYou');
+const nextBtn = document.getElementById('nextBtn');
+const dietForm = document.getElementById('dietForm');
+const result = document.getElementById('result');
+const mealPlan = document.getElementById('mealPlan');
 
-// Flip animation for cards
-document.querySelectorAll(".card").forEach(card => {
-    card.addEventListener("click", () => {
-        card.classList.toggle("flipped");
-    });
+// Handle Sign Up
+signupForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  signupForm.classList.add('hidden');
+  thankYou.classList.remove('hidden');
 });
 
-// Show current time in footer
-function updateTime() {
-    const now = new Date();
-    document.getElementById("time").innerText = now.toLocaleTimeString();
-}
-setInterval(updateTime, 1000);
-
-And in your style.css, add the flip animation styles:
-
-/* Flip card effect */
-.card {
-  perspective: 1000px;
-  position: relative;
-  width: 180px;
-  height: 100px;
-  cursor: pointer;
-  transition: transform 0.6s;
-  transform-style: preserve-3d;
-}
-
-.card.flipped {
-  transform: rotateY(180deg);
-}
-
-.card .front, 
-.card .back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  backface-visibility: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 2px solid #4db6ac;
-  border-radius: 12px;
-}
-
-.card .front {
-  background: #111827;
-  color: #fff;
-}
-
-.card .back {
-  background: #4db6ac;
-  color: #111827;
-  transform: rotateY(180deg);
-}
-// script.js
-
-// Flip animation for cards
-document.querySelectorAll(".card").forEach(card => {
-    card.addEventListener("click", () => {
-        card.classList.toggle("flipped");
-    });
+// Show Diet Form
+nextBtn.addEventListener('click', () => {
+  thankYou.classList.add('hidden');
+  dietForm.classList.remove('hidden');
 });
 
-// Show current time in footer
-function updateTime() {
-    const now = new Date();
-    document.getElementById("time").innerText = now.toLocaleTimeString();
-}
-setInterval(updateTime, 1000);
+// Handle Diet Form
+dietForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const dietType = document.getElementById('dietType').value;
+  const mealType = document.getElementById('mealType').value;
+  const healthIssues = document.getElementById('healthIssues').value.toLowerCase();
 
+  // Simple meal plan logic
+  let plan = '';
+
+  if (dietType === 'veg' && mealType === 'breakfast') {
+    plan = 'Oats (50g), Almonds (20g), Banana (100g)';
+  } else if (dietType === 'nonveg' && mealType === 'lunch') {
+    plan = 'Grilled Chicken (150g), Brown Rice (100g), Salad (50g)';
+  } else if (dietType === 'vegan' && mealType === 'dinner') {
+    plan = 'Quinoa (100g), Tofu (80g), Steamed Veggies (70g)';
+  } else {
+    plan = 'Whole grains (100g), Lentils (80g), Fruits (100g)';
+  }
+
+  if (healthIssues.includes('diabetes')) {
+    plan += '<br><strong>Note:</strong> Low sugar options recommended.';
+  }
+  if (healthIssues.includes('bp')) {
+    plan += '<br><strong>Note:</strong> Low salt intake suggested.';
+  }
+
+  mealPlan.innerHTML = plan;
+  dietForm.classList.add('hidden');
+  result.classList.remove('hidden');
+});
