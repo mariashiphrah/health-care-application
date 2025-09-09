@@ -286,6 +286,25 @@
   <div class="front">Mobile App</div>
   <div class="back">Displays health insights</div>
 </div>
+<head>
+  <meta charset="UTF-8">
+  <title>Enter Your Name</title>
+</head>
+<body>
+  <h2>Welcome!</h2>
+
+  <p>Enter your name:</p>
+  <input type="text" id="nameInput" placeholder="Your name">
+  <button onclick="showName()">Submit</button>
+
+  <p><strong>Your Name:</strong> <span id="displayName">[Your Name]</span></p>
+
+  <script>
+    function showName() {
+      const name = document.getElementById('nameInput').value;
+      document.getElementById('displayName').textContent = name;
+    }
+  </script>
     <script> src="script.js"</script>
 </body>
 </html>
