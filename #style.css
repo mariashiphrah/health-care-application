@@ -1,248 +1,115 @@
- :root{
-  --bg:#f4f6f8;
-  --card:#ffffff;
-  --muted:#6b7280;
-  --accent:#2563eb;
-  --accent-2:#14b8a6;
-  --glass: rgba(255,255,255,0.6);
-  --radius:14px;
-  --glass-2: rgba(255,255,255,0.03);
-  --shadow: 0 6px 20px rgba(0,0,0,0.08); 
-  --gradient: linear-gradient(135deg,#2563eb 0%, #14b8a6 100%);
-  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+/* ===== General Reset ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-html,body{
-  height:100%;
-  margin:0;
-  background: var(--bg);
-  color:var(--muted);
-  font-family: Inter , system-ui,-apple-system,"segoe UI",Roboto,sans-serif;
+body {
+  font-family: Arial, sans-serif;
+  background: #f4f9f9;
+  color: #333;
+  line-height: 1.6;
 }
 
-.wrap{
-  min-height:100%;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  padding:40px 20px;
-  box-sizing:border-box;
-  background:var(--gradient) ;
-}
-
-
-h1{font-size:24px;margin:0}
-p.lead{color:var(--muted);margin:6px 0 0;font-size:14px}
-
-/* layout */
-.content{
-  display:grid;
-  grid-template-columns: 1fr 360px;
-  gap:24px;
-  align-items:start;
-}
-.wizard {
-  background: linear-gradient(180deg,var(--glass),var(--glass-2));
-  border-radius:12px;
-  padding:18px;
-  min-height:360px;
-}
-.card
- {
-  width: 960px;
-  max-width: 100%;
-  background: var(--card);
-  border-radius: var(--radius);
-  padding: 40px 30px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-}
-
-/* Header inside card */
-.header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 30px;
-  border-bottom: 1px solid rgba(0,0,0,0.05);
-  padding-bottom: 15px;
-}
-
-/* Branding area */
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  font-size: 20px;
-  font-weight: 600;
-  color: var(--accent);
-}
-
-/* Small circular logo */
-.logo {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background: var(--accent-2);
+/* ===== Header & Nav ===== */
+header {
+  background: #2a9d8f;
   color: white;
-  font-size: 18px;
+  padding: 1rem;
+  text-align: center;
+}
+
+nav {
+  margin-top: 0.5rem;
+}
+
+nav a {
+  color: white;
+  margin: 0 15px;
+  text-decoration: none;
   font-weight: bold;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-}
-
-.progress-label{color:var(--muted);font-size:13px}
-
-/* steps */
-.step {
-  min-height:240px;
-  position:relative;
-}
-.step > * {transition:opacity .28s ease, transform .28s ease}
-.hidden {opacity:0;pointer-events:none;transform:translateY(8px);height:0;overflow:hidden}
-.visible {opacity:1;pointer-events:auto;transform:none}
-
-/* form elements */
-label{display:block;margin:10px 0 6px;color:var(--muted);font-size:13px}
-input[type="text"], input[type="email"], input[type="tel"], select, textarea{
-  width:100%;p/* Progress bar wrapper */
-.progress {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 30px;
-  height: 6px;
-  background: var(--muted);
-  border-radius: 10px;
-  position: relative;
-  overflow: hidden;
-}
-
-/* Active progress fill */
-.progress::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  width: 0%;
-  background: linear-gradient(90deg, var(--accent), var(--accent-2));
-  border-radius: 10px;
-  transition: width 0.4s ease;
-}
-
-/* Bullet steps */
-.bullet {
-  position: relative;
-  z-index: 2;
-  width: 26px;
-  height: 26px;
-  border-radius: 50%;
-  background: #fff;
-  border: 2px solid var(--muted);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 13px;
-  font-weight: 600;
-  color: var(--muted);
-  transition: all 0.3s ease;
-}
-
-/* When active */
-.bullet.active {
-  border-color: var(--accent);
-  background: var(--accent);
-  color: #fff;
-  transform: scale(1.1);
-  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
-}adding:10px 12px;border-radius:10px;
-  border:1px solid rgba(255,255,255,0.03);
-  background: rgba(255,255,255,0.02);
-  color: #e6eef8; box-sizing:border-box;font-size:14px;
-}
-.row{display:flex;gap:10px}
-.row > *{flex:1}
-
-/* Panel (form container) */
-.panel {
-  margin: 0 auto 40px;
-  padding: 40px 28px;
-  border-radius: 16px;
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(14px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  box-shadow: 0 6px 28px rgba(0, 0, 0, 0.15);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.panel:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
-}
-
-/* Panel heading */
-.panel h3 {
-  margin: 0 0 16px;
-  font-size: 1.4rem;
-  font-weight: 600;
-  color: var(--card);
-}
-
-/* Panel content text */
-.panel p {
-  font-size: 0.95rem;
-  line-height: 1.5;
-  color: var(--muted);
-  margin-bottom: 20px;
-}
-
-/* Actions container */
-.actions {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 16px;
-  margin-top: 24px;
-}
-
-/* Buttons */
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 12px 22px;
-  border-radius: 10px;
-  font-size: 0.95rem;
-  font-weight: 500;
   cursor: pointer;
+}
+
+nav a:hover {
+  text-decoration: underline;
+}
+
+/* ===== Main Content ===== */
+main {
+  padding: 2rem;
+  text-align: center;
+}
+
+/* Hide all sections by default */
+section {
+  display: none;
+}
+
+/* Show only active section */
+section.active {
+  display: block;
+}
+
+/* ===== Buttons ===== */
+button {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.7rem 1.5rem;
+  background: #e76f51;
+  color: white;
   border: none;
-  transition: all 0.3s ease;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: background 0.3s;
 }
 
-.btn-primary {
-  background: linear-gradient(90deg, var(--accent), var(--accent-2));
-  color: #fff;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+button:hover {
+  background: #d9534f;
 }
 
-.btn-primary:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 8px 18px rgba(0,0,0,0.2);
+/* ===== Form Card ===== */
+.form-card {
+  background: white;
+  padding: 2rem;
+  border-radius: 10px;
+  max-width: 400px;
+  margin: 1rem auto;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  text-align: left;
 }
 
-.btn-secondary {
-  background: rgba(255, 255, 255, 0.15);
-  color: var(--muted);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+label {
+  display: block;
+  margin: 0.5rem 0 0.2rem;
+  font-weight: bold;
 }
 
-.btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.25);
-  color: var(--card);
+input {
+  width: 100%;
+  padding: 0.7rem;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+  border: 1px solid #ccc;
 }
-body{ 
-    bsckground:var(--accent-2);
+
+/* ===== Meal Plan Card ===== */
+.meal-plan {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 10px;
+  max-width: 500px;
+  margin: 1rem auto;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  text-align: left;
+}
+
+/* ===== Footer ===== */
+footer {
+  text-align: center;
+  padding: 1rem;
+  background: #2a9d8f;
+  color: white;
+  margin-top: 2rem;
 }

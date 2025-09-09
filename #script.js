@@ -1,56 +1,35 @@
- // Step navigation
-function nextStep(step) {
-  // hide all steps
-  document.querySelectorAll(".step").forEach(el => el.classList.add("hidden"));
-  // show current step
-  document.getElementById(step${step}).classList.remove("hidden");
-
-  // update progress bullets
-  document.querySelectorAll(".bullet").forEach((b, i) => {
-    if (i < step) {
-      b.classList.add("active");
-    } else {
-      b.classList.remove("active");
-    }
+// ===== Function to switch between pages =====
+function showPage(pageId) {
+  // Hide all sections
+  document.querySelectorAll("main section").forEach(sec => {
+    sec.classList.remove("active");
   });
+
+  // Show the selected section
+  document.getElementById(pageId).classList.add("active");
 }
 
-// Meal Planner Logic
+// ===== Handle Sign Up Form Submission =====
 document.addEventListener("DOMContentLoaded", () => {
-  const dietForm = document.getElementById("dietForm");
-  const mealPlan = document.getElementById("mealPlan");
+  const form = document.getElementById("signupForm");
 
-  if (dietForm) {
-    dietForm.addEventListener("submit", (e) => {
-      e.preventDefault();
+  form.addEventListener("submit", (e) => {
+    e.preventDefault(); // Prevent page reload
 
-      const dietType = document.getElementById("dietType").value;
-      const mealType = document.getElementById("mealType").value;
-      const healthIssues = document.getElementById("healthIssues").value.toLowerCase();
+    // Get input values
+    const fullname = document.getElementById("fullname").value;
+    const email = document.getElementById("email").value;
+    const phone = document.getElementById("phone").value;
 
-      let plan = "";
+    // Put values into summary section
+    document.getElementById("outName").textContent = fullname;
+    document.getElementById("outEmail").textContent = email;
+    document.getElementById("outPhone").textContent = phone || "N/A";
 
-      // Simple meal suggestions
-      if (dietType === "vegetarian" && mealType === "breakfast") {
-        plan = "Oats with fruits + almonds";
-      } else if (dietType === "nonveg" && mealType === "lunch") {
-        plan = "Grilled chicken + brown rice + veggies";
-      } else if (dietType === "vegan" && mealType === "dinner") {
-        plan = "Quinoa + lentils + mixed greens";
-      } else {
-        plan = "Whole grains + protein + vegetables";
-      }
+    // Show the summary page
+    showPage("summary");
 
-      // Add health-specific suggestions
-      if (healthIssues.includes("diabetes")) {
-        plan += "<br><strong>Note:</strong> Avoid added sugar & refined carbs.";
-      }
-      if (healthIssues.includes("bp") || healthIssues.includes("blood pressure")) {
-        plan += "<br><strong>Note:</strong> Use less salt & processed food.";
-      }
-
-      mealPlan.innerHTML = plan;
-      nextStep(4); // go to Recommended Meal step
-    });
-  }
+    // Reset form after submission
+    form.reset();
+  });
 });
