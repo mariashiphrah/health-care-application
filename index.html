@@ -1,63 +1,453 @@
-<!DOCTYPE html>
+ <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Healthy Meal Planner</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css"
+  <style>
+    :root{
+      --bg:#0f1724;        /* deep navy */
+      --card:#0f172a;      /* slight variant */
+      --muted:#94a3b8;     /* muted text */
+      --accent:#60a5fa;    /* blue */
+      --accent-2:#34d399;  /* green */
+      --glass: rgba(255,255,255,0.04);
+      --radius:14px;
+      --glass-2: rgba(255,255,255,0.03);
+      --shadow: 0 10px 30px rgba(2,6,23,0.6);
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    }
+    html,body{height:100%;margin:0;background:
+      radial-gradient(1000px 400px at 10% 10%, rgba(96,165,250,0.06), transparent 8%),
+      linear-gradient(180deg,#071229 0%, #081325 60%, #04121a 100%), color:var(--muted);}
+    .wrap{
+      min-height:100%;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:40px 20px;
+      box-sizing:border-box;
+    }
+
+    .card{
+      width:960px;
+      max-width:100%;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+      border-radius:var(--radius);
+      padding:28px;
+      box-shadow:var(--shadow);
+      color:#e6eef8;
+      overflow:hidden;
+    }
+
+    header{
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:16px;
+      margin-bottom:20px;
+    }
+    .brand{
+      display:flex;
+      gap:14px;
+      align-items:center;
+    }
+    .logo{
+      width:52px;height:52px;border-radius:12px;background:linear-gradient(135deg,var(--accent),var(--accent-2));
+      display:flex;align-items:center;justify-content:center;font-weight:700;color:#022;height:52px;
+      box-shadow: 0 6px 18px rgba(52,211,153,0.12), inset 0 -4px 12px rgba(255,255,255,0.06);
+      font-size:18px;
+    }
+    h1{font-size:24px;margin:0}
+    p.lead{color:var(--muted);margin:6px 0 0;font-size:14px}
+
+    .content{
+      display:grid;
+      grid-template-columns: 1fr 360px;
+      gap:24px;
+      align-items:start;
+    }
+
+    /* left pane (wizard) */
+    .wizard {
+      background: linear-gradient(180deg,var(--glass),var(--glass-2));
+      border-radius:12px;
+      padding:18px;
+      min-height:360px;
+    }
+
+    .progress {
+      display:flex;
+      gap:8px;
+      align-items:center;
+      margin-bottom:18px;
+    }
+    .bullet{
+      width:36px;height:36px;border-radius:10px;background:transparent;border:2px solid rgba(255,255,255,0.06);
+      display:flex;align-items:center;justify-content:center;color:var(--muted);font-weight:700;
+      transition:all .28s ease;
+    }
+    .bullet.active{background:linear-gradient(90deg,var(--accent),var(--accent-2)); color:#001; transform:scale(1.06)}
+    .progress-label{color:var(--muted);font-size:13px}
+
+    .step {
+      min-height:240px;
+      position:relative;
+    }
+    .step > * {transition:opacity .28s ease, transform .28s ease}
+    .hidden {opacity:0;pointer-events:none;transform:translateY(8px);height:0;overflow:hidden}
+    .visible {opacity:1;pointer-events:auto;transform:none}
+
+    label{display:block;margin:10px 0 6px;color:var(--muted);font-size:13px}
+    input[type="text"], input[type="email"], input[type="tel"], select, textarea{
+      width:100%;padding:10px 12px;border-radius:10px;border:1px solid rgba(255,255,255,0.03);
+      background: rgba(255,255,255,0.02); color: #e6eef8; box-sizing:border-box;
+      font-size:14px;
+    }
+    .row{display:flex;gap:10px}
+    .row > *{flex:1}
+
+    .btn{
+      display:inline-flex;align-items:center;gap:10px;padding:10px 14px;border-radius:10px;border:none;cursor:pointer;
+      background:linear-gradient(90deg,var(--accent),var(--accent-2));color:#012;font-weight:700;
+      box-shadow: 0 8px 18px rgba(6,12,34,0.5);
+    }
+    .btn.ghost{background:transparent;border:1px solid rgba(255,255,255,0.06);color:var(--muted);font-weight:600}
+    .actions{display:flex;gap:12px;margin-top:18px;justify-content:flex-end}
+
+    /* right pane (summary / styling) */
+    .panel{
+      background:linear-gradient(180deg, rgba(255,255,255,0.015), rgba(255,255,255,0.01));
+      padding:18px;border-radius:12px;min-height:360px;
+    }
+    .panel h3{margin:0 0 8px}
+    .meta{color:var(--muted);font-size:13px;margin-bottom:12px}
+    .result{margin-top:12px;padding:12px;border-radius:10px;background:rgba(255,255,255,0.02);color:#e6eef8}
+
+    /* small screens */
+    @media (max-width:880px){
+      .content{grid-template-columns:1fr; }
+      .panel{order:2}
+    }
+  </style>
 </head>
 <body>
-  <div class="container">
-    <h1>Healthy Meal Planner</h1>
+  <div class="wrap">
+    <div class="card" role="main">
+      <header>
+        <div class="brand">
+          <div class="logo">VA</div>
+          <div>
+            <h1>VitalAI — Healthy Meal Planner</h1>
+            <p class="lead">Simple wizard to collect info and recommend a meal</p>
+          </div>
+        </div>
+        <div style="text-align:right">
+          <small style="color:var(--muted)">Built with HTML · CSS · JS</small>
+        </div>
+      </header>
 
-    <!-- Sign Up Form -->
-    <form id="signupForm">
-      <h2>Sign Up</h2>
-      <input type="text" id="name" placeholder="Enter your name" required>
-      <input type="email" id="email" placeholder="Enter your email" required>
-      <input type="tel" id="phone" placeholder="Enter phone number" required>
-      <button type="submit">Sign Up</button>
-    </form>
+      <div class="content">
+        <section class="wizard" aria-label="Signup wizard">
+          <div class="progress" aria-hidden="true">
+            <div class="bullet" id="b1">1</div>
+            <div class="progress-label">Sign Up</div>
+            <div style="width:14px"></div>
+            <div class="bullet" id="b2">2</div>
+            <div class="progress-label">Thank you</div>
+            <div style="width:14px"></div>
+            <div class="bullet" id="b3">3</div>
+            <div class="progress-label">Diet Preferences</div>
+            <div style="width:14px"></div>
+            <div class="bullet" id="b4">4</div>
+            <div class="progress-label">Recommended Meal</div>
+          </div>
 
-    <!-- Thank You Message -->
-    <div id="thankYou" class="hidden">
-      <h2>Thank you for signing up!</h2>
-      <button id="nextBtn">Next</button>
-    </div>
+          <!-- Step 1 - Sign up -->
+          <div id="step1" class="step visible">
+            <h2 style="margin:0 0 8px">Sign Up</h2>
+            <p class="meta">Enter your details so we can personalize your meal plan.</p>
 
-    <!-- Diet Preference Form -->
-    <form id="dietForm" class="hidden">
-      <h2>Your Diet Preferences</h2>
+            <label for="name">Full name</label>
+            <input id="name" type="text" placeholder="Jane Doe" required>
 
-      <label>Choose Diet Type:</label>
-      <select id="dietType">
-        <option value="veg">Vegetarian</option>
-        <option value="nonveg">Non-Vegetarian</option>
-        <option value="vegan">Vegan</option>
-      </select>
+            <label for="email">Email</label>
+            <input id="email" type="email" placeholder="you@example.com" required>
 
-      <label>Choose Meal Type:</label>
-      <select id="mealType">
-        <option value="breakfast">Breakfast</option>
-        <option value="lunch">Lunch</option>
-        <option value="dinner">Dinner</option>
-      </select>
+            <label for="phone">Phone (optional)</label>
+            <input id="phone" type="tel" placeholder="+1 555 123 4567">
 
-      <label>Health Problems:</label>
-      <input type="text" id="healthIssues" placeholder="E.g., Diabetes, BP">
+            <div class="actions">
+              <button class="btn" id="signupBtn">Sign Up</button>
+            </div>
+          </div>
 
-      <button type="submit">Get Meal Plan</button>
-    </form>
+          <!-- Step 2 - Thank you -->
+          <div id="step2" class="step hidden">
+            <h2 style="margin:0 0 8px">Thank you!</h2>
+            <p class="meta">We saved your details. Click next to choose your dietary preferences.</p>
 
-    <!-- Result Section -->
-    <div id="result" class="hidden">
-      <h2>Your Recommended Meal</h2>
-      <div id="mealPlan"></div>
+            <div style="margin-top:18px">
+              <strong id="welcomeName"></strong>
+              <div class="actions">
+                <button class="btn ghost" id="backToSignup">Back</button>
+                <button class="btn" id="toPrefs">Next</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 3 - Diet preferences -->
+          <div id="step3" class="step hidden">
+            <h2 style="margin:0 0 8px">Your Diet Preferences</h2>
+            <p class="meta">Pick your diet type and meal time to get a recommended meal.</p>
+
+            <label for="dietType">Choose Diet Type</label>
+            <select id="dietType">
+              <option value="vegetarian">Vegetarian</option>
+              <option value="vegan">Vegan</option>
+              <option value="pescatarian">Pescatarian</option>
+              <option value="omnivore">Omnivore</option>
+              <option value="keto">Keto</option>
+            </select>
+
+            <label for="mealType">Choose Meal Type</label>
+            <select id="mealType">
+              <option>Breakfast</option>
+              <option>Lunch</option>
+              <option>Dinner</option>
+              <option>Snack</option>
+            </select>
+
+            <label for="healthProblems">Health Problems (optional)</label>
+            <input id="healthProblems" placeholder="E.g. diabetes, high BP">
+
+            <div class="actions">
+              <button class="btn ghost" id="backToThanks">Back</button>
+              <button class="btn" id="getPlan">Get Meal Plan</button>
+            </div>
+          </div>
+
+          <!-- Step 4 - Result -->
+          <div id="step4" class="step hidden">
+            <h2 style="margin:0 0 8px">Your Recommended Meal</h2>
+            <p class="meta">Based on the info you provided, here is a quick recommendation.</p>
+
+            <div class="result" id="resultBox">
+              <strong id="mealTitle">—</strong>
+              <p id="mealDesc" style="margin-top:8px;color:var(--muted)"></p>
+            </div>
+
+            <div class="actions">
+              <button class="btn ghost" id="startOver">Start Over</button>
+              <button class="btn" id="savePlan">Save Plan</button>
+            </div>
+          </div>
+        </section>
+
+        <aside class="panel" aria-label="Summary panel">
+          <h3>Summary</h3>
+          <p class="meta">Live preview of what the user has entered</p>
+
+          <div>
+            <div><strong>Name:</strong> <span id="sumName">—</span></div>
+            <div><strong>Email:</strong> <span id="sumEmail">—</span></div>
+            <div><strong>Diet:</strong> <span id="sumDiet">—</span></div>
+            <div><strong>Meal:</strong> <span id="sumMeal">—</span></div>
+            <div style="margin-top:12px"><strong>Notes:</strong>
+              <div id="sumNotes" style="color:var(--muted);margin-top:6px">No notes yet.</div>
+            </div>
+          </div>
+
+          <div style="margin-top:18px">
+            <small style="color:var(--muted)">Tip: Use the wizard to generate a tailored meal suggestion. Save to keep it for later.</small>
+          </div>
+        </aside>
+      </div>
     </div>
   </div>
 
+  <script>
+    /* Utility to show/hide steps */
+    const show = (id) => {
+      [1,2,3,4].forEach(n=>{
+        const el = document.getElementById('step'+n);
+        if(!el) return;
+        if('step'+n === id) {
+          el.classList.remove('hidden'); el.classList.add('visible');
+        } else { el.classList.remove('visible'); el.classList.add('hidden'); }
+      });
+      // update bullets
+      document.getElementById('b1').classList.toggle('active', id==='step1');
+      document.getElementById('b2').classList.toggle('active', id==='step2');
+      document.getElementById('b3').classList.toggle('active', id==='step3');
+      document.getElementById('b4').classList.toggle('active', id==='step4');
+    };
+
+    /* Elements */
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const phoneInput = document.getElementById('phone');
+    const signupBtn = document.getElementById('signupBtn');
+
+    const welcomeName = document.getElementById('welcomeName');
+    const toPrefs = document.getElementById('toPrefs');
+    const backToSignup = document.getElementById('backToSignup');
+
+    const dietType = document.getElementById('dietType');
+    const mealType = document.getElementById('mealType');
+    const healthProblems = document.getElementById('healthProblems');
+    const getPlan = document.getElementById('getPlan');
+    const backToThanks = document.getElementById('backToThanks');
+
+    const mealTitle = document.getElementById('mealTitle');
+    const mealDesc = document.getElementById('mealDesc');
+    const resultBox = document.getElementById('resultBox');
+
+    const startOver = document.getElementById('startOver');
+    const savePlan = document.getElementById('savePlan');
+
+    /* summary */
+    const sumName = document.getElementById('sumName');
+    const sumEmail = document.getElementById('sumEmail');
+    const sumDiet = document.getElementById('sumDiet');
+    const sumMeal = document.getElementById('sumMeal');
+    const sumNotes = document.getElementById('sumNotes');
+
+    function updateSummary() {
+      sumName.textContent = nameInput.value || '—';
+      sumEmail.textContent = emailInput.value || '—';
+      sumDiet.textContent = dietType.value || '—';
+      sumMeal.textContent = mealType.value || '—';
+      sumNotes.textContent = healthProblems.value ? healthProblems.value : 'No notes yet.';
+    }
+
+    /* Basic validation and next */
+    signupBtn.addEventListener('click', () => {
+      const name = nameInput.value.trim();
+      const email = emailInput.value.trim();
+      if(!name){ alert('Please enter your name'); nameInput.focus(); return; }
+      if(!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ alert('Please enter a valid email'); emailInput.focus(); return; }
+      welcomeName.textContent = Welcome, ${name}!;
+      updateSummary();
+      show('step2');
+    });
+
+    backToSignup.addEventListener('click', ()=> show('step1'));
+    toPrefs.addEventListener('click', ()=> {
+      show('step3');
+      updateSummary();
+    });
+
+    backToThanks.addEventListener('click', ()=> show('step2'));
+
+    /* Simple recommendation logic */
+    function recommend(diet, meal, notes){
+      // A simple sample rule-based recommender (you can extend this)
+      diet = diet.toLowerCase();
+      meal = meal.toLowerCase();
+      const notesLower = (notes||'').toLowerCase();
+
+      if(diet.includes('vegan')){
+        if(meal.includes('breakfast')) return {
+          title: 'Vegan Power Oats',
+          desc: 'Oats cooked with almond milk, chia seeds, berries and a spoon of almond butter — high in fiber & plant protein.'
+        };
+        if(meal.includes('lunch')||meal.includes('dinner')) return {
+          title: 'Tofu & Quinoa Bowl',
+          desc: 'Grilled tofu, lemon-tahini dressing, mixed greens, quinoa and roasted vegetables — balanced and filling.'
+        };
+      }
+
+      if(diet.includes('vegetarian')){
+        if(meal.includes('breakfast')) return {
+          title: 'Greek Yogurt Bowl',
+          desc: 'Greek yogurt with walnuts, honey and seasonal fruit — great protein and probiotics.'
+        };
+        return {
+          title: 'Paneer & Veggie Wrap',
+          desc: 'Wholegrain wrap filled with spiced paneer, salad greens and a light yogurt sauce.'
+        };
+      }
+
+      if(diet.includes('keto')){
+        return {
+          title: 'Keto Egg & Avocado Plate',
+          desc: 'Scrambled eggs with avocado, spinach and a side of smoked salmon (optional). Low-carb, nutrient-dense.'
+        };
+      }
+
+      if(diet.includes('pescatarian')){
+        return {
+          title: 'Grilled Salmon & Greens',
+          desc: 'Grilled salmon, roasted asparagus, lemon and olive oil — omega-3 rich and light.'
+        };
+      }
+
+      // fallback omnivore
+      if(meal.includes('breakfast')) return {
+        title: 'Protein Pancakes',
+        desc: 'Pancakes made with oats and protein powder, topped with fruit and a drizzle of honey.'
+      };
+      return {
+        title: 'Grilled Chicken Salad',
+        desc: 'Grilled chicken, mixed greens, quinoa, cherry tomatoes and a light vinaigrette.'
+      };
+    }
+
+    getPlan.addEventListener('click', ()=>{
+      updateSummary();
+      const rec = recommend(dietType.value, mealType.value, healthProblems.value);
+      mealTitle.textContent = rec.title;
+      mealDesc.innerHTML = rec.desc;
+      show('step4');
+      // small animation
+      resultBox.style.transform = 'translateY(6px)';
+      setTimeout(()=> resultBox.style.transform='none', 120);
+    });
+
+    startOver.addEventListener('click', ()=>{
+      // clear inputs but keep user comfortable
+      nameInput.value = '';
+      emailInput.value = '';
+      phoneInput.value = '';
+      dietType.value = 'vegetarian';
+      mealType.value = 'Breakfast';
+      healthProblems.value = '';
+      updateSummary();
+      show('step1');
+    });
+
+    savePlan.addEventListener('click', ()=>{
+      // simple localStorage save for demo
+      const payload = {
+        name: nameInput.value,
+        email: emailInput.value,
+        diet: dietType.value,
+        meal: mealType.value,
+        notes: healthProblems.value,
+        recommended: mealTitle.textContent,
+        desc: mealDesc.textContent,
+        savedAt: new Date().toISOString()
+      };
+      const arr = JSON.parse(localStorage.getItem('savedPlans')||'[]');
+      arr.push(payload);
+      localStorage.setItem('savedPlans', JSON.stringify(arr));
+      alert('Plan saved locally in your browser. You can extend this to save to a server.');
+    });
+
+    // small enhancements
+    document.addEventListener('DOMContentLoaded', ()=> {
+      show('step1');
+      updateSummary();
+      // enter key to submit on signup
+      [nameInput, emailInput, phoneInput].forEach(el=>{
+        el.addEventListener('keydown', e=>{
+          if(e.key === 'Enter') signupBtn.click();
+        });
+      });
+    });
+  </script>
   <script src="script.js"></script>
 </body>
 </html>
-    
-    

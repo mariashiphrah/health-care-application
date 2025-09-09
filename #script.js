@@ -1,52 +1,56 @@
- // DOM Elements
-const signupForm = document.getElementById('signupForm');
-const thankYou = document.getElementById('thankYou');
-const nextBtn = document.getElementById('nextBtn');
-const dietForm = document.getElementById('dietForm');
-const result = document.getElementById('result');
-const mealPlan = document.getElementById('mealPlan');
+ // Step navigation
+function nextStep(step) {
+  // hide all steps
+  document.querySelectorAll(".step").forEach(el => el.classList.add("hidden"));
+  // show current step
+  document.getElementById(step${step}).classList.remove("hidden");
 
-// Handle Sign Up
-signupForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-  signupForm.classList.add('hidden');
-  thankYou.classList.remove('hidden');
-});
+  // update progress bullets
+  document.querySelectorAll(".bullet").forEach((b, i) => {
+    if (i < step) {
+      b.classList.add("active");
+    } else {
+      b.classList.remove("active");
+    }
+  });
+}
 
-// Show Diet Form
-nextBtn.addEventListener('click', () => {
-  thankYou.classList.add('hidden');
-  dietForm.classList.remove('hidden');
-});
+// Meal Planner Logic
+document.addEventListener("DOMContentLoaded", () => {
+  const dietForm = document.getElementById("dietForm");
+  const mealPlan = document.getElementById("mealPlan");
 
-// Handle Diet Form
-dietForm.addEventListener('submit', (e) => {
-  e.preventDefault();
-  const dietType = document.getElementById('dietType').value;
-  const mealType = document.getElementById('mealType').value;
-  const healthIssues = document.getElementById('healthIssues').value.toLowerCase();
+  if (dietForm) {
+    dietForm.addEventListener("submit", (e) => {
+      e.preventDefault();
 
-  // Simple meal plan logic
-  let plan = '';
+      const dietType = document.getElementById("dietType").value;
+      const mealType = document.getElementById("mealType").value;
+      const healthIssues = document.getElementById("healthIssues").value.toLowerCase();
 
-  if (dietType === 'veg' && mealType === 'breakfast') {
-    plan = 'Oats (50g), Almonds (20g), Banana (100g)';
-  } else if (dietType === 'nonveg' && mealType === 'lunch') {
-    plan = 'Grilled Chicken (150g), Brown Rice (100g), Salad (50g)';
-  } else if (dietType === 'vegan' && mealType === 'dinner') {
-    plan = 'Quinoa (100g), Tofu (80g), Steamed Veggies (70g)';
-  } else {
-    plan = 'Whole grains (100g), Lentils (80g), Fruits (100g)';
+      let plan = "";
+
+      // Simple meal suggestions
+      if (dietType === "vegetarian" && mealType === "breakfast") {
+        plan = "Oats with fruits + almonds";
+      } else if (dietType === "nonveg" && mealType === "lunch") {
+        plan = "Grilled chicken + brown rice + veggies";
+      } else if (dietType === "vegan" && mealType === "dinner") {
+        plan = "Quinoa + lentils + mixed greens";
+      } else {
+        plan = "Whole grains + protein + vegetables";
+      }
+
+      // Add health-specific suggestions
+      if (healthIssues.includes("diabetes")) {
+        plan += "<br><strong>Note:</strong> Avoid added sugar & refined carbs.";
+      }
+      if (healthIssues.includes("bp") || healthIssues.includes("blood pressure")) {
+        plan += "<br><strong>Note:</strong> Use less salt & processed food.";
+      }
+
+      mealPlan.innerHTML = plan;
+      nextStep(4); // go to Recommended Meal step
+    });
   }
-
-  if (healthIssues.includes('diabetes')) {
-    plan += '<br><strong>Note:</strong> Low sugar options recommended.';
-  }
-  if (healthIssues.includes('bp')) {
-    plan += '<br><strong>Note:</strong> Low salt intake suggested.';
-  }
-
-  mealPlan.innerHTML = plan;
-  dietForm.classList.add('hidden');
-  result.classList.remove('hidden');
 });
