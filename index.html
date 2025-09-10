@@ -5,223 +5,124 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>NutriCart Presentation</title>
   <link rel="stylesheet" href="style.css">
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Segoe UI', 'Helvetica Neue', sans-serif;
-      background: linear-gradient(135deg,#2193b0,#6dd5ed);
-      color: #ffffff;
-      text-shadow: 2px 2px 6px rgba(0,0,0,0.4);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
-      overflow: hidden;
-    }
-
-    .slideshow-container {
-      width: 100%;
-      height: 100%;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .slide {
-      width: 100%;
-      height: 100%;
-      position: absolute;
-      top: 0;
-      left: 100%;
-      opacity: 0;
-      transition: all 1s ease;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      padding: 60px;
-      box-sizing: border-box;
-      text-align: center;
-      background-size: cover;
-      background-position: center;
-    }
-
-    .slide.active {
-      left: 0;
-      opacity: 1;
-    }
-
-    h1 {
-      font-size: 3rem;
-      margin-bottom: 20px;
-      text-shadow: 2px 2px 8px rgba(0,0,0,0.6);
-    }
-
-    h2 {
-      font-size: 2rem;
-      margin-bottom: 15px;
-      font-weight: 500;
-    }
-
-    p, li {
-      font-size: 1.2rem;
-      line-height: 1.6;
-      text-shadow: 1px 1px 5px rgba(0,0,0,0.7);
-    }
-
-    ul, ol {
-      text-align: left;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    img {
-      max-width: 60%;
-      border-radius: 15px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.6);
-      margin-top: 20px;
-    }
-
-    /* Navigation */
-    .nav-btn {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      background: rgba(0,0,0,0.6);
-      color: #450f64;
-      border: none;
-      font-size: 2rem;
-      cursor: pointer;
-      padding: 12px 20px;
-      border-radius: 50%;
-      transition: background 0.3s;
-      z-index: 100;
-    }
-
-    .nav-btn:hover {
-      background: rgba(0,0,0,0.85);
-    }
-
-    #prevBtn { left: 20px; }
-    #nextBtn { right: 20px; }
-
-    /* Dark thank you slide */
-    .thankyou {
-      background: #07758a !important;
-      color: #100404;
-    }
-  </style>
 </head>
 <body>
 
   <div class="slideshow-container">
 
     <!-- Slide 1 -->
-    <div class="slide active" style="background-image:url('images/slide1.jpg');">
-      <h1>NutriCart</h1>
-      <h2>Your Smart Health & Diet Companion</h2>
-      <p><b>Personalized AI Wellness, Dynamic Diet Plans & Seamless Notifications</b></p>
-      <p>Presented by: The Hackathon Team</p>
+    <div class="slide fade">
+      <div class="content">
+        <h2>NutriCart: Your Integrated Wellness Partner</h2>
+        <ul>
+          <li>AI Wellness Trainer – Monitor health & provide insights</li>
+          <li>Personalized Diet Plans – Tailored to preferences</li>
+          <li>Smart Reminders – Never miss medications</li>
+          <li>Hospital & Wellness Finder</li>
+        </ul>
+      </div>
+      <div class="image-box">
+        <img src="images/slide1.jpg" alt="NutriCart Intro">
+      </div>
     </div>
 
     <!-- Slide 2 -->
-    <div class="slide" style="background-image:url('images/slide2.jpg');">
-      <h1>The Modern Health Maze</h1>
-      <p>In today’s fast-paced world, maintaining holistic health is a significant challenge.</p>
-      <ul>
-        <li><b>Complex Health Management:</b> Diverse needs make tracking overwhelming.</li>
-        <li><b>Time-Consuming Tracking:</b> Manual logging and visits demand effort.</li>
-        <li><b>Fragmented Apps:</b> Lack of unified AI wellness + diet coaching.</li>
-      </ul>
+    <div class="slide fade">
+      <div class="content">
+        <h2>The Problem</h2>
+        <ul>
+          <li>Rising lifestyle diseases</li>
+          <li>Lack of personalized health guidance</li>
+          <li>Disconnected food & health systems</li>
+        </ul>
+      </div>
+      <div class="image-box">
+        <img src="images/slide2.jpg" alt="Problem Slide">
+      </div>
     </div>
 
     <!-- Slide 3 -->
-    <div class="slide" style="background-image:url('images/slide3.jpg');">
-      <h1>NutriCart: Your Integrated Wellness Partner</h1>
-      <ul>
-        <li><b>AI Wellness Trainer</b> – Monitors health & provides insights</li>
-        <li><b>Personalized Diet Plans</b> – Tailored to preferences</li>
-        <li><b>Smart Reminders</b> – Never miss medications</li>
-        <li><b>Hospital & Wellness Finder</b></li>
-      </ul>
+    <div class="slide fade">
+      <div class="content">
+        <h2>Our Solution: NutriCart</h2>
+        <ul>
+          <li>Seamlessly integrates diet, health & wellness</li>
+          <li>AI-powered personalization</li>
+          <li>Accessible via app</li>
+        </ul>
+      </div>
+      <div class="image-box">
+        <img src="images/slide3.jpg" alt="Solution Slide">
+      </div>
     </div>
 
     <!-- Slide 4 -->
-    <div class="slide" style="background-image:url('images/slide4.jpg');">
-      <h1>Seamless User Journey</h1>
-      <ol>
-        <li>Quick Sign Up</li>
-        <li>Health Questionnaire</li>
-        <li>AI-Powered Diet Plan</li>
-        <li>Convenient Food Ordering</li>
-        <li>Proactive AI Notifications</li>
-        <li>Integrated Hospital Finder</li>
-      </ol>
+    <div class="slide fade">
+      <div class="content">
+        <h2>Seamless User Journey</h2>
+        <ul>
+          <li>Quick Sign-Up</li>
+          <li>Health Questionnaire</li>
+          <li>AI Diet Plan</li>
+          <li>Convenient Food Ordering</li>
+          <li>AI Notifications</li>
+          <li>Integrated Hospital Finder</li>
+        </ul>
+      </div>
+      <div class="image-box">
+        <img src="images/slide4.jpg" alt="User Journey">
+      </div>
     </div>
 
     <!-- Slide 5 -->
-    <div class="slide" style="background-image:url('images/slide5.jpg');">
-      <h1>Core Innovation & Technology</h1>
-      <ul>
-        <li>AI Wellness Trainer</li>
-        <li>Personalized Diet Plans</li>
-        <li>Integrated Food Ordering</li>
-        <li>Hospital Integration</li>
-      </ul>
+    <div class="slide fade">
+      <div class="content">
+        <h2>Core Innovation & Technology</h2>
+        <ul>
+          <li>AI Wellness Trainer</li>
+          <li>Personalized Diet Plans</li>
+          <li>Integrated Food Ordering</li>
+          <li>Hospital Integration</li>
+        </ul>
+      </div>
+      <div class="image-box">
+        <img src="images/slide5.jpg" alt="Innovation Slide">
+      </div>
     </div>
 
     <!-- Slide 6 -->
-    <div class="slide" style="background-image:url('images/slide6.jpg');">
-      <h1>Impact & Hackathon Readiness</h1>
-      <ul>
-        <li>Improves nutritional discipline</li>
-        <li>Reduces hospital visits</li>
-        <li>Unified experience (wellness + diet)</li>
-        <li>Hackathon-ready demo</li>
-      </ul>
+    <div class="slide fade">
+      <div class="content">
+        <h2>Impact & Hackathon Readiness</h2>
+        <ul>
+          <li>Improves nutritional discipline</li>
+          <li>Integrates hospitals</li>
+          <li>Unified experience</li>
+          <li><span class="highlight">Hackathon-ready demo</span></li>
+        </ul>
+      </div>
+      <div class="image-box">
+        <img src="images/slide6.jpg" alt="Impact Slide">
+      </div>
     </div>
 
     <!-- Slide 7 -->
-    <div class="slide thankyou">
-      <h1>Thank You!</h1>
-      <p>Team NutriCart: P. Nagadithya, Sandhinasvinee, Maria, Anjali – CSM Branch</p>
-      <img src="images/slide7.jpg" alt="Team">
+    <div class="slide fade">
+      <div class="content">
+        <h2>Thank You!</h2>
+        <p>Team NutriCart: Nagaditiya, Sandhinaslvee, Maria, Anjali - CSM Branch</p>
+      </div>
+      <div class="image-box">
+        <img src="images/slide7.jpg" alt="Thank You Slide">
+      </div>
     </div>
 
-    <!-- Navigation -->
-    <button id="prevBtn" class="nav-btn">&#10094;</button>
-    <button id="nextBtn" class="nav-btn">&#10095;</button>
+    <!-- Navigation Buttons -->
+    <a class="prev" onclick="changeSlide(-1)">&#10094;</a>
+    <a class="next" onclick="changeSlide(1)">&#10095;</a>
+
   </div>
 
-  <script>
-    const slides = document.querySelectorAll(".slide");
-    let currentSlide = 0;
-
-    function showSlide(index) {
-      slides.forEach((slide, i) => {
-        slide.classList.remove("active");
-        if (i === index) slide.classList.add("active");
-      });
-    }
-
-    document.getElementById("nextBtn").addEventListener("click", () => {
-      currentSlide = (currentSlide + 1) % slides.length;
-      showSlide(currentSlide);
-    });
-
-    document.getElementById("prevBtn").addEventListener("click", () => {
-      currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-      showSlide(currentSlide);
-    });
-
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "ArrowRight") {
-        currentSlide = (currentSlide + 1) % slides.length;
-        showSlide(currentSlide);
-      } else if (e.key === "ArrowLeft") {
-        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-        showSlide(currentSlide);
-      }
-    });
-  </script>
+  <script src="script.js"></script>
 </body>
 </html>

@@ -1,35 +1,23 @@
-// ===== Function to switch between pages =====
-function showPage(pageId) {
-  // Hide all sections
-  document.querySelectorAll("main section").forEach(sec => {
-    sec.classList.remove("active");
-  });
+ let slideIndex = 0;
+showSlide(slideIndex);
 
-  // Show the selected section
-  document.getElementById(pageId).classList.add("active");
+// Next/Prev controls
+function changeSlide(n) {
+  showSlide(slideIndex += n);
 }
 
-// ===== Handle Sign Up Form Submission =====
-document.addEventListener("DOMContentLoaded", () => {
-  const form = document.getElementById("signupForm");
+function showSlide(n) {
+  let slides = document.getElementsByClassName("slide");
+  if (n >= slides.length) { slideIndex = 0; }
+  if (n < 0) { slideIndex = slides.length - 1; }
 
-  form.addEventListener("submit", (e) => {
-    e.preventDefault(); // Prevent page reload
+  for (let i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+  slides[slideIndex].style.display = "flex";
+}
 
-    // Get input values
-    const fullname = document.getElementById("fullname").value;
-    const email = document.getElementById("email").value;
-    const phone = document.getElementById("phone").value;
-
-    // Put values into summary section
-    document.getElementById("outName").textContent = fullname;
-    document.getElementById("outEmail").textContent = email;
-    document.getElementById("outPhone").textContent = phone || "N/A";
-
-    // Show the summary page
-    showPage("summary");
-
-    // Reset form after submission
-    form.reset();
-  });
-});
+// Auto slideshow every 6 sec (optional)
+setInterval(() => {
+  changeSlide(1);
+}, 6000);

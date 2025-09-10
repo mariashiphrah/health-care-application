@@ -1,27 +1,96 @@
  body {
   margin: 0;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  background: linear-gradient(135deg, #ffffff, #dff6ff);
-  color: #222;
-  text-align: center;
+  font-family: "Segoe UI", Helvetica, Arial, sans-serif;
+  background: #0a1f44;
+  color: #fff;
+  overflow: hidden;
 }
 
-h1, h2, h3 {
-  color: #003366;
+/* Slideshow container */
+.slideshow-container {
+  position: relative;
+  max-width: 100%;
+  height: 100vh;
+  overflow: hidden;
 }
 
-button {
-  background: #7d0404;
-  color: white;
-  padding: 12px 24px;
-  border: none;
-  border-radius: 8px;
+/* Each slide */
+.slide {
+  display: none;
+  height: 100vh;
+  padding: 50px;
+  box-sizing: border-box;
+  background: linear-gradient(135deg, #0072ff, #00c6ff);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.content {
+  max-width: 45%;
+}
+
+h2 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+  color: #fff;
+  text-shadow: 2px 2px 6px rgba(0,0,0,0.3);
+}
+
+ul {
+  list-style: disc;
+  padding-left: 20px;
+}
+
+ul li {
+  font-size: 1.2rem;
+  margin: 12px 0;
+  color: #f0f0f0;
+}
+
+.highlight {
+  color: #ffeb3b;
+  font-weight: bold;
+}
+
+/* Image box */
+.image-box img {
+  max-width: 400px;
+  border-radius: 12px;
+  box-shadow: 0 6px 15px rgba(0,0,0,0.4);
+}
+
+/* Navigation buttons */
+.prev, .next {
   cursor: pointer;
-  font-size: 16px;
-  margin: 10px;
-  transition: background 0.3s;
+  position: absolute;
+  top: 50%;
+  width: auto;
+  padding: 16px;
+  margin-top: -22px;
+  color: white;
+  font-weight: bold;
+  font-size: 30px;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+  background: rgba(0,0,0,0.4);
 }
 
-button:hover {
-  background: #5026f5;
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+.prev:hover, .next:hover {
+  background: rgba(0,0,0,0.8);
+}
+
+/* Fade animation */
+.fade {
+  animation: fadeEffect 1s;
+}
+
+@keyframes fadeEffect {
+  from {opacity: .4} 
+  to {opacity: 1}
 }
